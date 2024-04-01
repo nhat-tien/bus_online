@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'dart:async';
+import 'pages/home.dart';
+import 'pages/login.dart';
 
-void main() {
+void main() async {
+	await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -11,7 +16,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -30,9 +35,7 @@ class MyApp extends StatelessWidget {
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(
-					seedColor: Colors.deepPurple,
-					primary: const Color(0xffff5723)
-				),
+            seedColor: Colors.deepPurple, primary: const Color(0xffff5723)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -128,42 +131,71 @@ class MyHomePage extends StatefulWidget {
 //   }
 // }
 
+class SplashScreenState extends State<MyHomePage> {
+  final GetStorage _storage = GetStorage();
 
-class SplashScreenState extends State<MyHomePage> {  
-  @override  
-  void initState() {  
-    super.initState();  
-    Timer(const Duration(seconds: 5),  
-            ()=>Navigator.pushReplacement(context,  
-            MaterialPageRoute(builder:  
-                (context) => const HomeScreen()  
-            )  
-         )  
-    );  
-  }  
-  @override  
-  Widget build(BuildContext context) {  
-    return Container(  
-        color: Colors.yellow,  
-        child:FlutterLogo(size:MediaQuery.of(context).size.height)  
-    );  
+  @override
+  void initState() {
+    super.initState();
+    // Timer(
+    //     const Duration(seconds: 3),
+    //     () => Navigator.pushReplacement(context,
+    //         MaterialPageRoute(builder: (context) => const LoginPage())));
+    Timer(
+      const Duration(seconds: 3),
+      () {
+        if (_storage.read('userToken') != null) {
+          Get.off(const HomeScreen());
+        } else {
+				  Get.off(const LoginPage());
+				}
+      },
+    );
   }
-}
 
-
-class HomeScreen extends StatelessWidget {  
-
-	const HomeScreen({
-    super.key,
-  });
-
-  @override  
-  Widget build(BuildContext context) {  
-    return Scaffold(  
-      body: Center(  
-          child: Image.asset('assets/images/ic_launcher.png', width: 200,)
-			),
-			backgroundColor: Theme.of(context).colorScheme.primary,
-    );  
-  }  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+            const Spacer(),
+            Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                Container(
+                  width: 210,
+                  height: 210,
+                  decoration: const BoxDecoration(
+                      color: Color(0xFFD9D9D9), shape: BoxShape.circle),
+                ),
+                Image.asset(
+                  'assets/images/ic_launcher.png',
+                  width: 200,
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'BUS ONLINE',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 30,
+              ),
+            ),
+            const Spacer(),
+            const Text(
+              'by Tin and Tien',
+              style: TextStyle(
+                backgroundColor: Colors.transparent,
+                fontSize: 15,
+                color: Colors.white,
+              ),
+            ),
+          ])),
+      backgroundColor: Theme.of(context).colorScheme.primary,
+    );
+  }
 }
