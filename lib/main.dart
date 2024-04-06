@@ -147,7 +147,7 @@ class SplashScreenState extends State<MyHomePage> {
         if (_storage.read('userToken') != null) {
           Get.off(const HomeScreen());
         } else {
-				  Get.off(const LoginPage());
+				  Get.off(LoginPage());
 				}
       },
     );

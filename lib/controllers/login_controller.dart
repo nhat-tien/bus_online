@@ -1,35 +1,46 @@
+import 'package:bus_online/pages/home.dart';
+import 'package:bus_online/services/auth.dart';
+import 'package:bus_online/utils/user_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import '../env_key.dart';
 
 class LoginController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final role = 'customer'.obs;
+  final passwordVisible = false.obs;
 
-  Future<void> loginWithEmail({bool isDriver = false}) async {
-    try {
-      Map<String, String> headers = {'Content-Type': 'application/json'};
+  AuthService auth = AuthService();
 
-      var url =
-          Uri.parse(ApiEndPoints.baseURL + ApiEndPoints.authEndPoints.login);
+  Future<void> login() async {
 
-      Map<String, String> body = {
-        "email": emailController.text,
-        "password": passwordController.text,
-			  "role": isDriver ? 'driver' : 'customer',
-      };
 
-      http.Response response =
-          await http.post(url, body: jsonEncode(body), headers: headers);
+    final res = await auth.loginWithEmail(
+      emailController.text,
+      passwordController.text,
+      role.value,
+    );
+    final UserStorage storage = UserStorage();
 
-			if(response.statusCode == 200) {
-			  final json = jsonDecode(response.body);
-				if(json['status']) {
-				  final token = json['token'];
-				}
-			}
-    } catch (e) {}
+    if (res['status']) {
+      emailController.clear();
+      passwordController.clear();
+      storage.setUser(token: res['token'], name: res['user']['name'], role: res['user']['role']);
+      Get.to(const HomeScreen());
+    }
   }
+
+	String? emailValidator(String value) {
+		if (GetUtils.isNullOrBlank(value)! || !GetUtils.isEmail(value)) {
+		  return "Email định dạng không hợp lệ";
+		}
+		return null;
+	}
+
+	String? passwordValidator(String value) {
+		if (GetUtils.isNullOrBlank(value)!) {
+		  return "Thông tin không thể để trống";
+		}
+		return null;
+	}
 }

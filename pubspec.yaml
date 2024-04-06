@@ -38,6 +38,8 @@ dependencies:
   get:
   get_storage: ^2.0.3
   http:
+  qr_flutter: ^4.1.0
+  mobile_scanner: ^2.1.0
 
 dev_dependencies:
   flutter_test:
