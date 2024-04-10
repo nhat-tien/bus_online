@@ -1,5 +1,4 @@
 import 'package:bus_online/controllers/register_controller.dart';
-import 'package:bus_online/pages/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -293,7 +292,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   padding: const EdgeInsets.symmetric(vertical: 70),
                   child: TextButton(
                       onPressed: () {
-                        Get.off(LoginPage());
+                        Get.offNamed('/login');
                       },
                       child: const Text(
                         'Bạn đã có tài khoản?, đi đến đăng nhập',

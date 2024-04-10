@@ -27,10 +27,21 @@ class UserStorage {
       return null;
     }
   }
-
-	String? getToken() {
-		return _storage.read('userToken');
+	String getName() {
+		var name = _storage.read('userName');
+		return name ?? "";
 	}
+
+	String getRole() {
+		var name = _storage.read('userRole');
+		return name ?? "";
+	}
+
+	String getToken() {
+		var name = _storage.read('userToken');
+		return name ?? "";
+	}
+
 
   void removeUser() {
     try {

@@ -1,6 +1,5 @@
-import 'package:bus_online/pages/home.dart';
-import 'package:bus_online/services/auth.dart';
-import 'package:bus_online/utils/user_storage.dart';
+import 'package:bus_online/services/auth_service.dart';
+import 'package:bus_online/storage/user_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,11 +21,11 @@ class LoginController extends GetxController {
     );
     final UserStorage storage = UserStorage();
 
-    if (res['status']) {
+    if (res != null) {
       emailController.clear();
       passwordController.clear();
+			Get.offNamed('/home');
       storage.setUser(token: res['token'], name: res['user']['name'], role: res['user']['role']);
-      Get.to(const HomeScreen());
     }
   }
 

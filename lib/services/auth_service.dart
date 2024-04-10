@@ -1,5 +1,6 @@
+import 'package:bus_online/fetch/fetch_base.dart';
 import 'package:bus_online/pages/login.dart';
-import 'package:bus_online/utils/user_storage.dart';
+import 'package:bus_online/storage/user_storage.dart';
 import 'package:flutter/material.dart';
 import '../env_key.dart';
 import 'package:http/http.dart' as http;
@@ -7,35 +8,27 @@ import 'package:get/get.dart';
 import 'dart:convert';
 
 class AuthService {
-
-      final UserStorage _storage = UserStorage();
+  final UserStorage _storage = UserStorage();
+  final FetchBase fetch = FetchBase();
 
   Future loginWithEmail(String email, String password, String role) async {
     try {
-      Map<String, String> headers = {'Content-Type': 'application/json'};
-
-      var url =
-          Uri.parse(ApiEndPoints.baseURL + ApiEndPoints.authEndPoints.login);
-
       Map<String, String> body = {
         "email": email,
         "password": password,
         "role": role,
       };
 
-      http.Response response =
-          await http.post(url, body: jsonEncode(body), headers: headers);
+      http.Response response = await fetch.post(
+        endPoint: ApiEndPoints.authEndPoints.login,
+        body: body,
+      );
 
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
         if (json['status']) {
-          final token = json['token'];
-
-					Get.snackbar('Xác thực', 'Đăng nhập thành công');
-          return {
-            'status': true,
-            'token': token,
-          };
+          Get.snackbar('Xác thực', 'Đăng nhập thành công');
+          return json;
         } else {
           throw jsonDecode(response.body)['message'] ?? "Unknow Error Occured";
         }
@@ -43,36 +36,28 @@ class AuthService {
         throw jsonDecode(response.body)['message'] ?? "Unknow Error Occured";
       }
     } catch (e) {
-			Get.snackbar('Xác thực', 'Đăng nhập thất bại');
+      Get.snackbar('Xác thực', 'Đăng nhập thất bại');
     }
   }
 
-	Future registerWithEmail(String name, String email, String password) async {
+  Future registerWithEmail(String name, String email, String password) async {
     try {
-      Map<String, String> headers = {'Content-Type': 'application/json'};
-
-      var url =
-          Uri.parse(ApiEndPoints.baseURL + ApiEndPoints.authEndPoints.register);
-
       Map<String, String> body = {
-			  "name" : name,
+        "name": name,
         "email": email,
         "password": password,
       };
 
-      http.Response response =
-          await http.post(url, body: jsonEncode(body), headers: headers);
+      http.Response response = await fetch.post(
+        endPoint: ApiEndPoints.authEndPoints.register,
+        body: body,
+      );
 
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
         if (json['status']) {
-          final token = json['token'];
-
-					Get.snackbar('Xác thực', 'Đăng kí thành công');
-          return {
-            'status': true,
-            'token': token,
-          };
+          Get.snackbar('Xác thực', 'Đăng kí thành công');
+          return json;
         } else {
           throw jsonDecode(response.body)['message'] ?? "Unknow Error Occured";
         }
@@ -80,32 +65,22 @@ class AuthService {
         throw jsonDecode(response.body)['message'] ?? "Unknow Error Occured";
       }
     } catch (e) {
-					Get.snackbar('Xác thực', 'Đăng kí thất bại');
+      Get.snackbar('Xác thực', 'Đăng kí thất bại');
     }
-	}
+  }
 
-	Future logout() async {
+  Future logout() async {
     try {
-
-      
-			final String? token = _storage.getToken();
-
-      Map<String, String> headers = {
-				'Content-Type': 'application/json',
-			  'Authorization' : 'Bearer $token',
-			};
-
-      var url =
-          Uri.parse(ApiEndPoints.baseURL + ApiEndPoints.authEndPoints.logout);
-
-      http.Response response =
-          await http.post(url, body: jsonEncode({}), headers: headers);
+      http.Response response = await fetch.post(
+        endPoint: ApiEndPoints.authEndPoints.logout,
+        auth: true,
+      );
 
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
         if (json['status']) {
-				   _storage.removeUser();
-				   Get.offAll(LoginPage());
+          _storage.removeUser();
+          Get.offAll(LoginPage());
         } else {
           throw jsonDecode(response.body)['message'] ?? "Unknow Error Occured";
         }
@@ -123,12 +98,15 @@ class AuthService {
             );
           });
     }
-	}
-  
+  }
 
-	bool isLogin() {
-	  final String? token = _storage.getToken(); 	
-		return token != null;
-	}
+  bool isLogin() {
+    final String? token = _storage.getToken();
+    return token != null;
+  }
 
+  bool isDriver() {
+    final String? role = _storage.getRole();
+    return role == 'driver';
+  }
 }

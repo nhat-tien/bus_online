@@ -1,3 +1,5 @@
+import 'package:bus_online/pages/register.dart';
+import 'package:bus_online/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -38,7 +40,14 @@ class MyApp extends StatelessWidget {
             seedColor: Colors.deepPurple, primary: const Color(0xffff5723)),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+			initialRoute: '/',
+			getPages: [
+				GetPage(name: '/', page: () => const MyHomePage(title: 'Bus Online')),
+				GetPage(name: '/login', page: () => LoginPage()),
+				GetPage(name: '/register', page: () => RegisterPage()),
+				GetPage(name: '/home', page: () => HomeScreen()),
+			],
     );
   }
 }
@@ -132,7 +141,7 @@ class MyHomePage extends StatefulWidget {
 // }
 
 class SplashScreenState extends State<MyHomePage> {
-  final GetStorage _storage = GetStorage();
+  final AuthService auth = AuthService();
 
   @override
   void initState() {
@@ -144,10 +153,10 @@ class SplashScreenState extends State<MyHomePage> {
     Timer(
       const Duration(seconds: 3),
       () {
-        if (_storage.read('userToken') != null) {
-          Get.off(const HomeScreen());
+        if (auth.isLogin()) {
+          Get.offNamed('/home');
         } else {
-				  Get.off(LoginPage());
+				  Get.offNamed('/login');
 				}
       },
     );
