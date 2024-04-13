@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ServicePage extends StatelessWidget {
-  ServicePage({super.key});
-
-  final List<Map<String, String>> features = [
-    {
-      'logo': 'assets/images/leather-jacket-1.png',
-      'title': 'Xem lịch trình xe bus',
-    }
-  ];
+  const ServicePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +14,8 @@ class ServicePage extends StatelessWidget {
               Text(
                 'Dịch vụ',
                 style: TextStyle(
-                  color: Color(0xFF626262),
-                  fontSize: 18,
+                  color: Colors.black,
+                  fontSize: 20,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -44,6 +38,7 @@ class ServicePage extends StatelessWidget {
                   ServiceItem(
                     logoPath: 'assets/images/leather-jacket-1.png',
                     title: 'Xem lịch trình xe bus',
+								    routePath: '/tuyen',
                   ),
                   ServiceItem(
                     logoPath: 'assets/images/leather-jacket-1.png',
@@ -64,20 +59,23 @@ class ServicePage extends StatelessWidget {
 }
 
 class ServiceItem extends StatelessWidget {
-  const ServiceItem({super.key, required this.logoPath, required this.title});
+  const ServiceItem({super.key, required this.logoPath, required this.title, this.routePath = ""});
 
   final String logoPath;
   final String title;
+  final String routePath;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => {},
+      onTap: () => {
+				Get.toNamed(routePath)
+			},
       child: Container(
 				width: 160,
 				padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
+            color: Colors.grey[300],
             borderRadius: const BorderRadius.all(Radius.circular(16))),
         child: Column(
 					crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +88,7 @@ class ServiceItem extends StatelessWidget {
               title,
 						textAlign: TextAlign.justify,
               style: const TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontSize: 16,
 							  
               ),

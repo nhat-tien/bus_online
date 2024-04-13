@@ -1,11 +1,14 @@
+import 'dart:async';
+
+import 'package:bus_online/pages/home.dart';
+import 'package:bus_online/pages/login.dart';
 import 'package:bus_online/pages/register.dart';
+import 'package:bus_online/pages/services/chi_tiet_tuyen.dart';
+import 'package:bus_online/pages/services/tra_cuu_tuyen_duong.dart';
 import 'package:bus_online/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'dart:async';
-import 'pages/home.dart';
-import 'pages/login.dart';
 
 void main() async {
 	await GetStorage.init();
@@ -44,9 +47,11 @@ class MyApp extends StatelessWidget {
 			initialRoute: '/',
 			getPages: [
 				GetPage(name: '/', page: () => const MyHomePage(title: 'Bus Online')),
-				GetPage(name: '/login', page: () => LoginPage()),
-				GetPage(name: '/register', page: () => RegisterPage()),
+				GetPage(name: '/login', page: () => const LoginPage()),
+				GetPage(name: '/register', page: () => const RegisterPage()),
 				GetPage(name: '/home', page: () => HomeScreen()),
+				GetPage(name: '/tuyen', page: () => TuyenPage()),
+				GetPage(name: '/chi-tiet-tuyen', page: () => ChiTietTuyenPage()),
 			],
     );
   }

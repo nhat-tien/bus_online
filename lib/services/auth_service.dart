@@ -1,10 +1,9 @@
 import 'package:bus_online/fetch/fetch_base.dart';
 import 'package:bus_online/pages/login.dart';
 import 'package:bus_online/storage/user_storage.dart';
-import 'package:flutter/material.dart';
-import '../env_key.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
+import 'package:bus_online/env_key.dart';
 import 'dart:convert';
 
 class AuthService {
@@ -80,7 +79,7 @@ class AuthService {
         final json = jsonDecode(response.body);
         if (json['status']) {
           _storage.removeUser();
-          Get.offAll(LoginPage());
+          Get.offAll(const LoginPage());
         } else {
           throw jsonDecode(response.body)['message'] ?? "Unknow Error Occured";
         }
@@ -88,25 +87,17 @@ class AuthService {
         throw jsonDecode(response.body)['message'] ?? "Unknow Error Occured";
       }
     } catch (e) {
-      showDialog(
-          context: Get.context!,
-          builder: (context) {
-            return SimpleDialog(
-              title: const Text('Error'),
-              contentPadding: const EdgeInsets.all(10),
-              children: [Text(e.toString())],
-            );
-          });
+      Get.snackbar('Lỗi', 'Hệ thống đang gặp lỗi');
     }
   }
 
   bool isLogin() {
-    final String? token = _storage.getToken();
-    return token != null;
+    final String token = _storage.getToken();
+    return token != "";
   }
 
   bool isDriver() {
-    final String? role = _storage.getRole();
+    final String role = _storage.getRole();
     return role == 'driver';
   }
 }

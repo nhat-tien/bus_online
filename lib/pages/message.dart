@@ -21,9 +21,9 @@ class MessagePage extends StatelessWidget {
           const Text(
             'Thông báo',
             style: TextStyle(
-              color: Color(0xFF626262),
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
+              color: Colors.black,
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
             ),
           ),
 					const SizedBox(height: 20,),

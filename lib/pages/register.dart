@@ -1,10 +1,9 @@
 import 'package:bus_online/controllers/register_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RegisterPage extends StatefulWidget {
-  RegisterPage({super.key});
+  const RegisterPage({super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -192,7 +191,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                                 prefixIcon: const Padding(
                                                   padding: EdgeInsets.all(5),
                                                   child: Icon(
-                                                    CupertinoIcons.lock_fill,
+                                                    Icons.lock,
                                                   ),
                                                 ),
                                                 suffixIcon: IconButton(
@@ -243,7 +242,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                                 prefixIcon: const Padding(
                                                   padding: EdgeInsets.all(5),
                                                   child: Icon(
-                                                    CupertinoIcons.lock_fill,
+                                                    Icons.lock,
                                                   ),
                                                 ),
                                                 suffixIcon: IconButton(

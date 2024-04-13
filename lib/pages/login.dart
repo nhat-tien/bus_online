@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -154,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                                                 prefixIcon: const Padding(
                                                   padding: EdgeInsets.all(5),
                                                   child: Icon(
-                                                    CupertinoIcons.lock_fill,
+                                                    Icons.lock,
                                                   ),
                                                 ),
                                                 suffixIcon: IconButton(

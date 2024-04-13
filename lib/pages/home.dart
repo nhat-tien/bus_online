@@ -62,8 +62,8 @@ class HomeScreen extends StatelessWidget {
         () => <Widget>[
           HomePage(userName: storage.getName()),
           MessagePage(),
-          ServicePage(),
-          PersonalPage()
+          const ServicePage(),
+          const PersonalPage()
         ][controller.currentPageIndex.value],
       )),
       backgroundColor: Colors.white,
