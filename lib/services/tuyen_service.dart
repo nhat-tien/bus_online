@@ -32,6 +32,7 @@ class TuyenService {
       http.Response res = await fetch.get(
         endPoint:
             '${ApiEndPoints.tuyenEndPoints.tuyen}/$maTuyen${ApiEndPoints.tramEndPoints.tram}',
+				auth: true,
       );
       if (res.statusCode != 200) return null;
 
@@ -50,6 +51,7 @@ class TuyenService {
       http.Response res = await fetch.get(
         endPoint:
             '${ApiEndPoints.tuyenEndPoints.tuyen}/$maTuyen${ApiEndPoints.chuyenXeEndPoints.chuyenXe}',
+				auth: true
       );
       if (res.statusCode != 200) return null;
 

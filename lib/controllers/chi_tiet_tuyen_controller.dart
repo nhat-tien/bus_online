@@ -11,6 +11,11 @@ class ChiTietTuyenController extends GetxController {
 	var tramList = <Tram>[].obs;
 	var chuyenXeList = <ChuyenXe>[].obs;
 
+	String get loTrinh {
+		List<String> list = tramList.map((element) => element.tenTram).toList();
+    return list.join(" > ");
+	}
+
 	@override
 	void onInit() {
 		super.onInit();
