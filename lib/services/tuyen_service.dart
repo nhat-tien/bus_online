@@ -27,8 +27,9 @@ class TuyenService {
     }
   }
 
-  Future<List<Tram>?> getTram(String maTuyen) async {
+  Future<List<Tram>?> getTramFromTuyen(String? maTuyen) async {
     try {
+			if(maTuyen == null) return null;
       http.Response res = await fetch.get(
         endPoint:
             '${ApiEndPoints.tuyenEndPoints.tuyen}/$maTuyen${ApiEndPoints.tramEndPoints.tram}',
@@ -46,8 +47,9 @@ class TuyenService {
   }
 
 
-  Future<List<ChuyenXe>?> getChuyenXe(String maTuyen) async {
+  Future<List<ChuyenXe>?> getChuyenXe(String? maTuyen) async {
     try {
+			if(maTuyen == null) return null;
       http.Response res = await fetch.get(
         endPoint:
             '${ApiEndPoints.tuyenEndPoints.tuyen}/$maTuyen${ApiEndPoints.chuyenXeEndPoints.chuyenXe}',

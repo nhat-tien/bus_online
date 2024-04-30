@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:bus_online/components/service_item.dart';
 
 class ServicePage extends StatelessWidget {
   const ServicePage({super.key});
@@ -8,93 +8,52 @@ class ServicePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
-        child: const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(
+            'Dịch vụ',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 22,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          // Expanded(
+          // 	child: ListView.builder(
+          // 		itemCount: features.length,
+          // 		itemBuilder: (_, index){
+          // 			final feature = features[index];
+          // 			return ServiceItem(feature: feature);
+          // 		}
+          // 	),
+          // ),
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
             children: [
-              Text(
-                'Dịch vụ',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                ),
+              ServiceItem(
+                logoPath: 'assets/images/leather-jacket-1.png',
+                title: 'Đăng kí chuyến xe',
+                routePath: '/danh-sach-dang-ki',
+                primary: true,
               ),
-              SizedBox(
-                height: 20,
+              ServiceItem(
+                logoPath: 'assets/images/leather-jacket-1.png',
+                title: 'Xem lịch trình xe bus',
+                routePath: '/tuyen',
               ),
-              // Expanded(
-              // 	child: ListView.builder(
-              // 		itemCount: features.length,
-              // 		itemBuilder: (_, index){
-              // 			final feature = features[index];
-              // 			return ServiceItem(feature: feature);
-              // 		}
-              // 	),
-              // ),
-              Wrap(
-						spacing: 10,
-						runSpacing: 10,
-                children: [
-                  ServiceItem(
-                    logoPath: 'assets/images/leather-jacket-1.png',
-                    title: 'Xem lịch trình xe bus',
-								    routePath: '/tuyen',
-                  ),
-                  ServiceItem(
-                    logoPath: 'assets/images/leather-jacket-1.png',
-                    title: 'Xem lịch trình xe bus',
-                  ),
-                  ServiceItem(
-                    logoPath: 'assets/images/leather-jacket-1.png',
-                    title: 'Xem lịch trình xe bus',
-                  ),
-                  ServiceItem(
-                    logoPath: 'assets/images/leather-jacket-1.png',
-                    title: 'Xem lịch trình xe bus',
-                  ),
-                ],
-              )
-            ]));
-  }
-}
-
-class ServiceItem extends StatelessWidget {
-  const ServiceItem({super.key, required this.logoPath, required this.title, this.routePath = ""});
-
-  final String logoPath;
-  final String title;
-  final String routePath;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => {
-				Get.toNamed(routePath)
-			},
-      child: Container(
-				width: 160,
-				padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-            color: Colors.grey[300],
-            borderRadius: const BorderRadius.all(Radius.circular(16))),
-        child: Column(
-					crossAxisAlignment: CrossAxisAlignment.start,
-					children: [
-            Image.asset(
-							logoPath,
-						fit: BoxFit.fitWidth,
-						),
-            Text(
-              title,
-						textAlign: TextAlign.justify,
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 16,
-							  
+              ServiceItem(
+                logoPath: 'assets/images/leather-jacket-1.png',
+                title: 'Xem lịch trình xe bus',
               ),
-            )
-          ]),
-        ),
-    );
+              ServiceItem(
+                logoPath: 'assets/images/leather-jacket-1.png',
+                title: 'Xem lịch trình xe bus',
+              ),
+            ],
+          )
+        ]));
   }
 }

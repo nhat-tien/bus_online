@@ -38,8 +38,8 @@ dependencies:
   get:
   get_storage: ^2.0.3
   http:
-  qr_flutter: ^4.1.0
   mobile_scanner: ^2.1.0
+  cool_alert: ^2.0.1
 
 
 dev_dependencies:

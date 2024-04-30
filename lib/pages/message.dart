@@ -22,7 +22,7 @@ class MessagePage extends StatelessWidget {
             'Thông báo',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 20,
+              fontSize: 22,
               fontWeight: FontWeight.w600,
             ),
           ),

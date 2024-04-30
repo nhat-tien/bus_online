@@ -5,11 +5,11 @@ import 'package:get/get.dart';
 
 class ChiTietTuyenController extends GetxController {
 	final TuyenService tuyenService = TuyenService();
-	var isLoading = true.obs; 
-  var maTuyen = "".obs;
-	var tenTuyen = "".obs;
-	var tramList = <Tram>[].obs;
-	var chuyenXeList = <ChuyenXe>[].obs;
+	final isLoading = true.obs; 
+  final maTuyen = "".obs;
+	final tenTuyen = "".obs;
+	final tramList = <Tram>[].obs;
+	final chuyenXeList = <ChuyenXe>[].obs;
 
 	String get loTrinh {
 		List<String> list = tramList.map((element) => element.tenTram).toList();
@@ -25,8 +25,12 @@ class ChiTietTuyenController extends GetxController {
 	}
 
   Future<void> getTramAndChuyenXe() async { 
-    final chuyenXe = await tuyenService.getChuyenXe(maTuyen.value);
-    final tram = await tuyenService.getTram(maTuyen.value);
+		final res = await Future.wait([
+       tuyenService.getChuyenXe(maTuyen.value),
+			tuyenService.getTramFromTuyen(maTuyen.value)
+		]);
+		final chuyenXe = res[0] as List<ChuyenXe>?;
+		final tram = res[1] as List<Tram>?;
 		if (chuyenXe != null && tram != null) {
 			tramList.value = tram;
 			chuyenXeList.value = chuyenXe;

@@ -1,7 +1,6 @@
 import 'package:bus_online/components/heading_with_back_button.dart';
 import 'package:bus_online/controllers/chi_tiet_tuyen_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class ChiTietTuyenPage extends StatelessWidget {
@@ -23,22 +22,22 @@ class ChiTietTuyenPage extends StatelessWidget {
                 ? const Center(child: CircularProgressIndicator())
                 : Column(
                     children: [
-											Text(
+											const Text(
 												"Lộ trình",
 												style: TextStyle(
 													fontSize: 18,
 													fontWeight: FontWeight.w600,
 												),
 											),
-                      SizedBox(height: 10,),
+                      const SizedBox(height: 10,),
                       Text(
 												controller.loTrinh,
-												style: TextStyle(
+												style: const TextStyle(
 													fontSize: 17,
 												),
 											),
-                      SizedBox(height: 10,),
-                      Text(
+                      const SizedBox(height: 10,),
+                      const Text(
 												"Danh sách các chuyến xe",
 												style: TextStyle(
 													fontSize: 18,

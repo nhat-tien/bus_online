@@ -8,8 +8,8 @@ class Tram {
   factory Tram.fromJson(Map<String, dynamic> json) {
     return Tram(
       maTram: json['maTram'] as String,
-      tenTram: json['tenTram'] as String,
-      thuTuTram: json['thuTuTram'] as String,
+      tenTram: json['tram']['tenTram'] as String,
+      thuTuTram: json['thuTuTram'] ?? "",
     );
   }
 }

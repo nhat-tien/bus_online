@@ -30,6 +30,7 @@ class HomeScreen extends StatelessWidget {
             topRight: Radius.circular(30.0),
           ),
           child: Obx(() => NavigationBar(
+						surfaceTintColor: Colors.white,
                 destinations: const [
                   NavigationDestination(
                     icon: Icon(Icons.home),
