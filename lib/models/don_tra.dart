@@ -15,6 +15,7 @@ class DonTra {
 	final String createdAt;
 	final ChuyenXe chuyenXe;
 	final String tenHanhKhach;
+	final String chieu;
 
 	DonTra({
      required this.id,
@@ -31,6 +32,7 @@ class DonTra {
 		required this.createdAt,
 		required this.chuyenXe,
 		required this.tenHanhKhach,
+		required this.chieu,
 	});
 
  factory DonTra.fromJson(Map<String, dynamic> json) {
@@ -55,6 +57,7 @@ class DonTra {
 		createdAt : json['createdAt'] as String,
 		chuyenXe: chuyenXe,
 		tenHanhKhach: json['khachHang']['name'] as String,
+		chieu: json['chieu'] as String,
 	);
 	}
 

@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 
 class HeadingWithBackButton extends StatelessWidget {
 
-  const HeadingWithBackButton({super.key, required this.title});
+	String? backTo;
+
+  HeadingWithBackButton({super.key, required this.title, this.backTo});
 
 	final String title;
 
@@ -11,7 +13,12 @@ class HeadingWithBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton.icon(
           onPressed: () {
+				    if(backTo != null) {
+							Get.toNamed(backTo!);
+							return;
+				    }
             Get.back();
+				    return;
           },
           label: Text(
             title,

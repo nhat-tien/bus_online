@@ -1,5 +1,6 @@
 import 'package:bus_online/components/full_width_button.dart';
 import 'package:bus_online/controllers/dang_ki_controller.dart';
+import 'package:bus_online/utils/format_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -236,14 +237,40 @@ class BookingPage extends StatelessWidget {
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: 26,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Tiền phí',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Obx(() => Text(
+                          '${formatCurrency(controller.fee.value)}đ',
+                          style: const TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )),
+                  ],
+                ),
                 const Spacer(),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   child: FullWidthButton(
-                    onPressed: () {
-                      Get.toNamed('/chon-chuyen-xe');
-                    },
+                    onPressed: () { 
+											if (!controller.kiemTraTuyenDaChon(context)) return;
+											if (!controller.kiemTraTramDaChon(context)) return;
+											if (!controller.kiemTraTramHopLe(context)) return;
+											if (!controller.kiemTraSoLuongVeDaChon(context)) return;
+											Get.toNamed('/chon-chuyen-xe'); 
+										},
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

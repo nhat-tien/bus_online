@@ -14,7 +14,7 @@ class ChiTietTuyenPage extends StatelessWidget {
           child: Column(
 					crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const HeadingWithBackButton(title: 'Chi tiết tuyến'),
+          HeadingWithBackButton(title: 'Chi tiết tuyến'),
           Expanded(
               child: Padding(
             padding: const EdgeInsets.all(10),

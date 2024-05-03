@@ -8,6 +8,7 @@ import 'package:bus_online/pages/dang_ki/xac_nhan_dang_ki.dart';
 import 'package:bus_online/pages/home.dart';
 import 'package:bus_online/pages/login.dart';
 import 'package:bus_online/pages/register.dart';
+import 'package:bus_online/pages/scanner/scanner.dart';
 import 'package:bus_online/pages/tra_cuu/chi_tiet_tuyen.dart';
 import 'package:bus_online/pages/tra_cuu/tra_cuu_tuyen_duong.dart';
 import 'package:bus_online/services/auth_service.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/dang-ki-chuyen', page: () => BookingPage()),
 				GetPage(name: '/chon-chuyen-xe', page: () => ChonChuyenXe()),
 				GetPage(name: '/xac-nhan', page: () => XacNhan()),
+				GetPage(name: '/scanner', page: () => const BarcodeScannerWithController()),
 			],
     );
   }
@@ -186,12 +188,15 @@ class SplashScreenState extends State<MyHomePage> {
               ),
             ),
             const Spacer(),
-            const Text(
-              'by Tin and Tien',
-              style: TextStyle(
-                backgroundColor: Colors.transparent,
-                fontSize: 15,
-                color: Colors.white,
+            const Padding(
+							padding: EdgeInsets.symmetric(vertical: 20),
+              child: Text(
+                'by Tin and Tien',
+                style: TextStyle(
+                  backgroundColor: Colors.transparent,
+                  fontSize: 15,
+                  color: Colors.white,
+                ),
               ),
             ),
           ])),

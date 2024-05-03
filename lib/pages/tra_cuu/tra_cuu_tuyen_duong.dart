@@ -14,7 +14,7 @@ class TuyenPage extends StatelessWidget {
             child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-				const HeadingWithBackButton(title: 'Danh sách tuyến'),
+				HeadingWithBackButton(title: 'Danh sách tuyến'),
         Expanded(
           child: Padding(
               padding: const EdgeInsets.all(10),

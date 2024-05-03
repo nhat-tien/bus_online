@@ -13,8 +13,10 @@ class FetchBase {
   final UserStorage _storage = UserStorage();
 
   Future<http.Response> get(
-      {required String endPoint, bool auth = false}) async {
+      {required String endPoint, bool auth = false, Map<String, String>? queryParams}) async {
+
     var url = Uri.parse(baseURL + endPoint);
+
     final Map<String, String> newHeaders = Map.from(baseHeaders);
     if (auth) {
       newHeaders['Authorization'] = 'Bearer ${_storage.getToken()}';
@@ -33,5 +35,18 @@ class FetchBase {
       newHeaders['Authorization'] = 'Bearer ${_storage.getToken()}';
     }
     return http.post(url, body: bodyReq, headers: newHeaders);
+  }
+
+  Future<http.Response> patch(
+      {required String endPoint,
+      Map<String, dynamic>? body,
+      bool auth = false}) async {
+    final url = Uri.parse(baseURL + endPoint);
+    final bodyReq = body != null ? jsonEncode(body) : jsonEncode({});
+    final Map<String, String> newHeaders = Map.from(baseHeaders);
+    if (auth) {
+      newHeaders['Authorization'] = 'Bearer ${_storage.getToken()}';
+    }
+    return http.patch(url, body: bodyReq, headers: newHeaders);
   }
 }

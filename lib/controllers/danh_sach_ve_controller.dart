@@ -10,7 +10,7 @@ class DanhSachVeController extends GetxController {
 	@override
 	void onInit() {
    super.onInit();
-	 getDonTra();
+		getDonTra();
 	}
 
 	Future<void> getDonTra() async {
@@ -19,5 +19,19 @@ class DanhSachVeController extends GetxController {
 		   listOfDonTra.value = res;
 			 isLoading.value = false;
 		}
+	}
+
+	Future<void> suDungVe({required int id, required String? maChuyen}) async {
+		if(maChuyen == null) return;
+		isLoading.value = true;
+		await customer.suDungVe(id: id, maChuyen: maChuyen);
+		reload();
+		Get.offAllNamed('danh-sach-dang-ki');
+	}
+
+	Future<void> reload() async {
+		isLoading.value = true;
+		listOfDonTra.value = [];
+    getDonTra();
 	}
 }

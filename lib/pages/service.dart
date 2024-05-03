@@ -44,14 +44,6 @@ class ServicePage extends StatelessWidget {
                 title: 'Xem lịch trình xe bus',
                 routePath: '/tuyen',
               ),
-              ServiceItem(
-                logoPath: 'assets/images/leather-jacket-1.png',
-                title: 'Xem lịch trình xe bus',
-              ),
-              ServiceItem(
-                logoPath: 'assets/images/leather-jacket-1.png',
-                title: 'Xem lịch trình xe bus',
-              ),
             ],
           )
         ]));
