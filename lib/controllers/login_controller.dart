@@ -25,11 +25,26 @@ class LoginController extends GetxController {
       emailController.clear();
       passwordController.clear();
 			Get.offNamed('/home');
-      storage.setUser(token: res['token'], name: res['user']['name'], role: res['user']['role']);
+			if(res['user']['chuyenXe']?[0]?['maChuyen'] == null)
+			{
+					storage.setUser(
+						token: res['token'],
+						name: res['user']['name'],
+						role: res['user']['role'],
+					);
+			} else {
+					storage.setUser(
+						token: res['token'],
+						name: res['user']['name'],
+						role: res['user']['role'],
+						maChuyen: res['user']['chuyenXe']?[0]?['maChuyen'] 					
+					);
+			}
     }
   }
 
 	String? emailValidator(String value) {
+		if(value == "") return null;
 		if (GetUtils.isNullOrBlank(value)! || !GetUtils.isEmail(value)) {
 		  return "Email định dạng không hợp lệ";
 		}

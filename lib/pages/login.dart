@@ -15,32 +15,16 @@ class _LoginPageState extends State<LoginPage> {
 
   final LoginController controller = Get.put(LoginController());
 
-  late FocusNode focusNode1;
-  late FocusNode focusNode2;
   final field1Key = GlobalKey<FormFieldState>();
   final field2Key = GlobalKey<FormFieldState>();
 
   @override
   void initState() {
     super.initState();
-    focusNode1 = FocusNode();
-    focusNode2 = FocusNode();
-    focusNode1.addListener(() {
-      if (focusNode1.hasFocus) {
-        field1Key.currentState!.reset();
-      }
-    });
-    focusNode2.addListener(() {
-      if (focusNode2.hasFocus) {
-        field2Key.currentState!.reset();
-      }
-    });
   }
 
   @override
   void dispose() {
-    focusNode1.dispose();
-    focusNode2.dispose();
     super.dispose();
   }
 
@@ -101,16 +85,16 @@ class _LoginPageState extends State<LoginPage> {
                                     padding: const EdgeInsets.only(left: 10),
                                     child: TextFormField(
                                         key: field1Key,
-                                        focusNode: focusNode1,
                                         obscureText: false,
                                         autovalidateMode:
-                                            AutovalidateMode.disabled,
+                                            AutovalidateMode.onUserInteraction,
                                         keyboardType:
                                             TextInputType.emailAddress,
                                         controller: controller.emailController,
                                         validator: (value) {
-                                          return controller
-                                              .emailValidator(value!);
+																					// return controller
+																					// 		.emailValidator(value!);
+																	return null;
                                         },
                                         decoration: const InputDecoration(
                                             border: InputBorder.none,
@@ -137,16 +121,16 @@ class _LoginPageState extends State<LoginPage> {
                                       child: Obx(
                                         () => TextFormField(
                                             key: field2Key,
-                                            focusNode: focusNode2,
                                             obscureText: !controller
                                                 .passwordVisible.value,
                                             autovalidateMode:
-                                                AutovalidateMode.disabled,
+                                                AutovalidateMode.onUserInteraction,
                                             controller:
                                                 controller.passwordController,
                                             validator: (value) {
-                                              return controller
-                                                  .passwordValidator(value!);
+																							// return controller
+																							// 		.passwordValidator(value!);
+																	return null;
                                             },
                                             decoration: InputDecoration(
                                                 border: InputBorder.none,

@@ -13,7 +13,8 @@ class DonTra {
 	final String tienPhi;
 	final String soLuong;
 	final String createdAt;
-	final ChuyenXe chuyenXe;
+	final String updatedAt;
+	final ChuyenXe? chuyenXe;
 	final String tenHanhKhach;
 	final String chieu;
 
@@ -30,7 +31,8 @@ class DonTra {
 		required this.tenTramDen,
 		required this.soLuong,
 		required this.createdAt,
-		required this.chuyenXe,
+		this.chuyenXe,
+		required this.updatedAt,
 		required this.tenHanhKhach,
 		required this.chieu,
 	});
@@ -55,6 +57,7 @@ class DonTra {
 		tienPhi: json['tienPhi'] as String,
 		soLuong : json['soLuong'].toString(),
 		createdAt : json['createdAt'] as String,
+		updatedAt: json['updatedAt'] as String,
 		chuyenXe: chuyenXe,
 		tenHanhKhach: json['khachHang']['name'] as String,
 		chieu: json['chieu'] as String,

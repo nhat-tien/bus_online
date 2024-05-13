@@ -63,8 +63,8 @@ class HomeScreen extends StatelessWidget {
         () => <Widget>[
           HomePage(userName: storage.getName()),
           MessagePage(),
-          const ServicePage(),
-          const PersonalPage()
+          ServicePage(),
+          PersonalPage()
         ][controller.currentPageIndex.value],
       )),
       backgroundColor: Colors.white,
@@ -102,19 +102,23 @@ class HomePage extends StatelessWidget {
 					const SizedBox(
 						height: 20,
 						),
-          ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(16)),
-            child: Image.network(
-              'https://cdn1.img.sputniknews.vn/img/07e6/02/03/13560397_84:0:1417:1000_1920x0_80_0_0_c74c0dc5e7acbe1783ca22be16fbbbef.jpg',
-              loadingBuilder: (context, child, progress) {
-                if (progress == null) {
-                  return child;
-                } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
+          SizedBox(
+						height: 260,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              child: Image.network(
+                'https://cdn1.img.sputniknews.vn/img/07e6/02/03/13560397_84:0:1417:1000_1920x0_80_0_0_c74c0dc5e7acbe1783ca22be16fbbbef.jpg',
+								fit: BoxFit.fitHeight,
+                loadingBuilder: (context, child, progress) {
+                  if (progress == null) {
+                    return child;
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ),
             ),
           ),
         ],

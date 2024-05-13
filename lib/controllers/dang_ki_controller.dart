@@ -99,7 +99,7 @@ class DangKiVeController extends GetxController {
 
   Future<void> _initTramAndChuyenXe() async {
     final res = await Future.wait([
-      tuyenService.getChuyenXe(tuyenSelected.value?.maTuyen),
+      tuyenService.getTatCaChuyenXe(tuyenSelected.value?.maTuyen),
       tuyenService.getTramFromTuyen(tuyenSelected.value?.maTuyen)
     ]);
     final chuyenXe = res[0] as List<ChuyenXe>?;

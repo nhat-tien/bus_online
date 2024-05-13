@@ -26,7 +26,7 @@ class ChiTietTuyenController extends GetxController {
 
   Future<void> getTramAndChuyenXe() async { 
 		final res = await Future.wait([
-       tuyenService.getChuyenXe(maTuyen.value),
+       tuyenService.getTatCaChuyenXe(maTuyen.value),
 			tuyenService.getTramFromTuyen(maTuyen.value)
 		]);
 		final chuyenXe = res[0] as List<ChuyenXe>?;

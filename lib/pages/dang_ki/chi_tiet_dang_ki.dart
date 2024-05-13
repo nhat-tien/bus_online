@@ -210,7 +210,7 @@ class ChiTietVe extends StatelessWidget {
                                                               .listOfDonTra[
                                                                   index]
                                                               .chuyenXe
-                                                              .gioLuotDi,
+                                                              ?.gioLuotDi ?? "",
                                                           style:
                                                               const TextStyle(
                                                             fontWeight:
@@ -223,7 +223,7 @@ class ChiTietVe extends StatelessWidget {
                                                               .listOfDonTra[
                                                                   index]
                                                               .chuyenXe
-                                                              .gioLuotVe,
+                                                              ?.gioLuotVe ?? "",
                                                           style:
                                                               const TextStyle(
                                                             fontWeight:

@@ -46,8 +46,25 @@ class TuyenService {
     }
   }
 
+  Future<ChuyenXe?> getChuyenXe(String maChuyen) async {
+    try {
+      http.Response res = await fetch.get(
+        endPoint:
+            '${ApiEndPoints.chuyenXeEndPoints.chuyenXe}/$maChuyen',
+				auth: true
+      );
+      if (res.statusCode != 200) return null;
 
-  Future<List<ChuyenXe>?> getChuyenXe(String? maTuyen) async {
+      final data = jsonDecode(res.body)['data'];
+      final ChuyenXe chuyenXe = ChuyenXe.fromJson(data);
+      return chuyenXe;
+    } catch (e) {
+      Get.snackbar('Lỗi', e.toString());
+      return null;
+    }
+	}
+
+  Future<List<ChuyenXe>?> getTatCaChuyenXe(String? maTuyen) async {
     try {
 			if(maTuyen == null) return null;
       http.Response res = await fetch.get(

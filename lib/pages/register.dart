@@ -13,10 +13,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final RegisterController controller = Get.put(RegisterController());
   final formKey = GlobalKey<FormState>();
 
-  late FocusNode focusNode1;
-  late FocusNode focusNode2;
-  late FocusNode focusNode3;
-  late FocusNode focusNode4;
   final field1Key = GlobalKey<FormFieldState>();
   final field2Key = GlobalKey<FormFieldState>();
   final field3Key = GlobalKey<FormFieldState>();
@@ -25,38 +21,10 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   void initState() {
     super.initState();
-    focusNode1 = FocusNode();
-    focusNode2 = FocusNode();
-    focusNode3 = FocusNode();
-    focusNode4 = FocusNode();
-    focusNode1.addListener(() {
-      if (focusNode1.hasFocus) {
-        field1Key.currentState!.reset();
-      }
-    });
-    focusNode2.addListener(() {
-      if (focusNode2.hasFocus) {
-        field2Key.currentState!.reset();
-      }
-    });
-    focusNode3.addListener(() {
-      if (focusNode3.hasFocus) {
-        field3Key.currentState!.reset();
-      }
-    });
-    focusNode4.addListener(() {
-      if (focusNode4.hasFocus) {
-        field4Key.currentState!.reset();
-      }
-    });
   }
 
   @override
   void dispose() {
-    focusNode1.dispose();
-    focusNode2.dispose();
-    focusNode3.dispose();
-    focusNode4.dispose();
     super.dispose();
   }
 
@@ -117,9 +85,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                     padding: const EdgeInsets.only(left: 10),
                                     child: TextFormField(
                                         key: field1Key,
-                                        focusNode: focusNode1,
                                         obscureText: false,
                                         controller: controller.nameController,
+                                            autovalidateMode:
+                                                AutovalidateMode.onUserInteraction,
                                         validator: (value) =>
                                             controller.nameValidator(value!),
                                         decoration: const InputDecoration(
@@ -146,9 +115,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                     padding: const EdgeInsets.only(left: 10),
                                     child: TextFormField(
                                         key: field2Key,
-                                        focusNode: focusNode2,
                                         obscureText: false,
                                         controller: controller.emailController,
+                                            autovalidateMode:
+                                                AutovalidateMode.onUserInteraction,
                                         validator: (value) =>
                                             controller.emailValidator(value!),
                                         decoration: const InputDecoration(
@@ -176,11 +146,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                       child: Obx(
                                         () => TextFormField(
                                             key: field3Key,
-                                            focusNode: focusNode3,
                                             obscureText: !controller
                                                 .passwordVisible.value,
                                             controller:
                                                 controller.passwordController,
+                                            autovalidateMode:
+                                                AutovalidateMode.onUserInteraction,
                                             validator: (value) {
                                               return controller
                                                   .passwordValidator(value!);
@@ -226,11 +197,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                       child: Obx(
                                         () => TextFormField(
                                             key: field4Key,
-                                            focusNode: focusNode4,
                                             obscureText: !controller
                                                 .repeatPasswordVisible.value,
                                             controller: controller
                                                 .repeatPasswordController,
+                                            autovalidateMode:
+                                                AutovalidateMode.onUserInteraction,
                                             validator: (value) {
                                               return controller
                                                   .repeatPasswordValidator(

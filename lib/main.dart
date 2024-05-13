@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:bus_online/env_key.dart';
 import 'package:bus_online/pages/dang_ki/chi_tiet_dang_ki.dart';
 import 'package:bus_online/pages/dang_ki/chon_chuyen_xe.dart';
 import 'package:bus_online/pages/dang_ki/danh_sach_dang_ki.dart';
 import 'package:bus_online/pages/dang_ki/form_dang_ki.dart';
 import 'package:bus_online/pages/dang_ki/xac_nhan_dang_ki.dart';
+import 'package:bus_online/pages/dashboard/dashboard.dart';
 import 'package:bus_online/pages/home.dart';
 import 'package:bus_online/pages/login.dart';
 import 'package:bus_online/pages/register.dart';
@@ -15,16 +17,21 @@ import 'package:bus_online/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
 	await GetStorage.init();
+	WidgetsFlutterBinding.ensureInitialized();
+	 await Supabase.initialize(
+    url: SupabaseKey.url,
+    anonKey: SupabaseKey.apiKey,
+  );
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -49,6 +56,7 @@ class MyApp extends StatelessWidget {
 				GetPage(name: '/chon-chuyen-xe', page: () => ChonChuyenXe()),
 				GetPage(name: '/xac-nhan', page: () => XacNhan()),
 				GetPage(name: '/scanner', page: () => const BarcodeScannerWithController()),
+				GetPage(name: '/dashboard', page: () => const Dashboard()),
 			],
     );
   }
