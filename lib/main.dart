@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'Smart Bus',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
             // seedColor: Colors.deepPurple, primary: const Color(0xffff5723)),
@@ -188,7 +188,7 @@ class SplashScreenState extends State<MyHomePage> {
             ),
             const SizedBox(height: 20),
             const Text(
-              'BUS ONLINE',
+              'SMART BUS',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
