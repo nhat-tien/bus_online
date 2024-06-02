@@ -11,6 +11,7 @@ class ApiEndPoints {
 	static TramEndPoints tramEndPoints = TramEndPoints();
 	static ChuyenXeEndPoints chuyenXeEndPoints = ChuyenXeEndPoints();
 	static CustomerEndPoints customerEndPoints = CustomerEndPoints();
+	static DriverEndPoints driverEndPoints = DriverEndPoints();
 }
 
 class AuthEndPoints {
@@ -36,6 +37,12 @@ class ChuyenXeEndPoints {
 }
 
 class CustomerEndPoints {
+	final String base = '';
+
+	String get bangDonTra => '$base/';
+}
+
+class DriverEndPoints {
 	final String base = '';
 
 	String get bangDonTra => '$base/';
